@@ -5,18 +5,14 @@ async function scrapeJadwal(url){
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(url);
-    
     await page.type('#Username', 'username bimay')
-    await page.type('#Password', 'password bimay')
-    await Promise.all([
-        page.waitForNavigation(),
-        page.click('#btnSubmit')
-    ])
-    page.waitForTimeout(1000)
-    const data = await page.$$eval(' .viconTable tbody tr', trs => trs.map((tr) => {
+    await page.type('#Password', 'password')
+    page.click('#btnSubmit')
+    await page.waitFor(1000)
+    const data = await page.$$eval('.viconTable tbody tr', trs => trs.map((tr) => {
         return tr.innerText;
       }));
-    console.log(data);
+      console.log(data);
     const aoalinks = data.map(l => [l]);
     const wb = xlsx.utils.book_new();
     const ws = xlsx.utils.aoa_to_sheet(aoalinks);
