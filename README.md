@@ -5,4 +5,4 @@ im planning to make google chrome extension with the schedule data
 how to use?
 modify the username bimay and password bimay with your own username and password
 
-help needed, i dont know how to delete specific things from the output file
+output notepad is seperated between category
