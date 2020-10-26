@@ -5,4 +5,4 @@ im planning to make google chrome extension with the schedule data
 how to use?
 modify the username bimay and password bimay with your own username and password
 
-output notepad is seperated between category
+output notepad is seperated between schedule category
