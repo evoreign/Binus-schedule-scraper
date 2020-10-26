@@ -6,9 +6,19 @@ async function scrapeJadwal(url) {
     const page = await browser.newPage();
     await page.goto(url);
     await page.type('#Username', 'usernamebimay')
-    await page.type('#Password', 'passwordbimay')
+    await page.type('#Password', 'usernamepassword')
     page.click('#btnSubmit')
     await page.waitFor(1000)
+
+
+    let div_selector_to_remove = ".trTemplate";
+    await page.evaluate((sel) => {
+        var elements = document.querySelectorAll(sel);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].parentNode.removeChild(elements[i]);
+        }
+    }, div_selector_to_remove)
+
 
     const data1 = await page.$$eval('.viconTable tbody tr td.iDate', trs1 => trs1.map((tr1) => {
         return tr1.innerText;
