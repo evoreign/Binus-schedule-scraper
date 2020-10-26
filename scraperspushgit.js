@@ -18,7 +18,7 @@ async function scrapeJadwal(url) {
     const wb1 = xlsx.utils.book_new();
     const ws1 = xlsx.utils.aoa_to_sheet(aoalinks1);
     xlsx.utils.book_append_sheet(wb1, ws1);
-    xlsx.writeFile(wb1, "outputdate.txt");
+    xlsx.writeFile(wb1, "1. outputdate.txt");
 
 
     const data2 = await page.$$eval('.viconTable tbody tr td.iTime', trs2 => trs2.map((tr2) => {
@@ -29,7 +29,7 @@ async function scrapeJadwal(url) {
     const wb2 = xlsx.utils.book_new();
     const ws2 = xlsx.utils.aoa_to_sheet(aoalinks2);
     xlsx.utils.book_append_sheet(wb2, ws2);
-    xlsx.writeFile(wb2, "outputtime.txt");
+    xlsx.writeFile(wb2, "2. outputtime.txt");
 
 
 
@@ -41,7 +41,7 @@ async function scrapeJadwal(url) {
     const wb3 = xlsx.utils.book_new();
     const ws3 = xlsx.utils.aoa_to_sheet(aoalinks3);
     xlsx.utils.book_append_sheet(wb3, ws3);
-    xlsx.writeFile(wb3, "outputclass.txt");
+    xlsx.writeFile(wb3, "3. outputclass.txt");
 
 
 
@@ -53,7 +53,7 @@ async function scrapeJadwal(url) {
     const wb4 = xlsx.utils.book_new();
     const ws4 = xlsx.utils.aoa_to_sheet(aoalinks4);
     xlsx.utils.book_append_sheet(wb4, ws4);
-    xlsx.writeFile(wb4, "outputmode.txt");
+    xlsx.writeFile(wb4, "4. outputmode.txt");
 
 
 
@@ -65,7 +65,7 @@ async function scrapeJadwal(url) {
     const wb5 = xlsx.utils.book_new();
     const ws5 = xlsx.utils.aoa_to_sheet(aoalinks5);
     xlsx.utils.book_append_sheet(wb5, ws5);
-    xlsx.writeFile(wb5, "outputcourse.txt");
+    xlsx.writeFile(wb5, "5. outputcourse.txt");
 
 
 
@@ -77,7 +77,7 @@ async function scrapeJadwal(url) {
     const wb6 = xlsx.utils.book_new();
     const ws6 = xlsx.utils.aoa_to_sheet(aoalinks6);
     xlsx.utils.book_append_sheet(wb6, ws6);
-    xlsx.writeFile(wb6, "outputmeetid.txt");
+    xlsx.writeFile(wb6, "6. outputmeetid.txt");
 
 
 
@@ -89,6 +89,6 @@ async function scrapeJadwal(url) {
     const wb7 = xlsx.utils.book_new();
     const ws7 = xlsx.utils.aoa_to_sheet(aoalinks7);
     xlsx.utils.book_append_sheet(wb7, ws7);
-    xlsx.writeFile(wb7, "outputmeetpass.txt");
+    xlsx.writeFile(wb7, "7. outputmeetpass.txt");
 }
 scrapeJadwal('https://myclass.apps.binus.ac.id/Home/Index');
