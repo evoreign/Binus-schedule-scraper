@@ -5,10 +5,11 @@ async function scrapeJadwal(url) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(url);
-    await page.type('#Username', 'usernamebimay')
-    await page.type('#Password', 'usernamepassword')
+    await page.type('#Username', 'Usernamebimay')
+    await page.type('#Password', 'Password')
     page.click('#btnSubmit')
     await page.waitFor(1000)
+
 
 
     let div_selector_to_remove = ".trTemplate";
@@ -18,6 +19,15 @@ async function scrapeJadwal(url) {
             elements[i].parentNode.removeChild(elements[i]);
         }
     }, div_selector_to_remove)
+
+    let div_selector_to_remove1 = ".loaderRow";
+    await page.evaluate((sel) => {
+        var elements = document.querySelectorAll(sel);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].parentNode.removeChild(elements[i]);
+        }
+    }, div_selector_to_remove1)
+
 
 
     const data1 = await page.$$eval('.viconTable tbody tr td.iDate', trs1 => trs1.map((tr1) => {
@@ -30,7 +40,6 @@ async function scrapeJadwal(url) {
     xlsx.utils.book_append_sheet(wb1, ws1);
     xlsx.writeFile(wb1, "1. outputdate.txt");
 
-
     const data2 = await page.$$eval('.viconTable tbody tr td.iTime', trs2 => trs2.map((tr2) => {
         return tr2.innerText;
     }));
@@ -40,8 +49,6 @@ async function scrapeJadwal(url) {
     const ws2 = xlsx.utils.aoa_to_sheet(aoalinks2);
     xlsx.utils.book_append_sheet(wb2, ws2);
     xlsx.writeFile(wb2, "2. outputtime.txt");
-
-
 
     const data3 = await page.$$eval('.viconTable tbody tr td.iClass', trs3 => trs3.map((tr3) => {
         return tr3.innerText;
@@ -53,8 +60,6 @@ async function scrapeJadwal(url) {
     xlsx.utils.book_append_sheet(wb3, ws3);
     xlsx.writeFile(wb3, "3. outputclass.txt");
 
-
-
     const data4 = await page.$$eval('.viconTable tbody tr td.iDeliveryMode', trs4 => trs4.map((tr4) => {
         return tr4.innerText;
     }));
@@ -64,8 +69,6 @@ async function scrapeJadwal(url) {
     const ws4 = xlsx.utils.aoa_to_sheet(aoalinks4);
     xlsx.utils.book_append_sheet(wb4, ws4);
     xlsx.writeFile(wb4, "4. outputmode.txt");
-
-
 
     const data5 = await page.$$eval('.viconTable tbody tr td.iCourse', trs5 => trs5.map((tr5) => {
         return tr5.innerText;
@@ -77,8 +80,6 @@ async function scrapeJadwal(url) {
     xlsx.utils.book_append_sheet(wb5, ws5);
     xlsx.writeFile(wb5, "5. outputcourse.txt");
 
-
-
     const data6 = await page.$$eval('.viconTable tbody tr td.iMeetingID', trs6 => trs6.map((tr6) => {
         return tr6.innerText;
     }));
@@ -89,8 +90,6 @@ async function scrapeJadwal(url) {
     xlsx.utils.book_append_sheet(wb6, ws6);
     xlsx.writeFile(wb6, "6. outputmeetid.txt");
 
-
-
     const data7 = await page.$$eval('.viconTable tbody tr td.iMeetingPassword', trs7 => trs7.map((tr7) => {
         return tr7.innerText;
     }));
@@ -100,5 +99,18 @@ async function scrapeJadwal(url) {
     const ws7 = xlsx.utils.aoa_to_sheet(aoalinks7);
     xlsx.utils.book_append_sheet(wb7, ws7);
     xlsx.writeFile(wb7, "7. outputmeetpass.txt");
+
+    const data8 = await page.$$eval('.viconTable tbody tr', trs8 => trs8.map((tr8) => {
+        return tr8.innerText;
+    }));
+    console.log(data8);
+    const aoalinks8 = data8.map(l8 => [l8]);
+    const wb8 = xlsx.utils.book_new();
+    const ws8 = xlsx.utils.aoa_to_sheet(aoalinks8);
+    xlsx.utils.book_append_sheet(wb8, ws8);
+    xlsx.writeFile(wb8, "8. outputrow.txt");
+
+
+
 }
 scrapeJadwal('https://myclass.apps.binus.ac.id/Home/Index');
