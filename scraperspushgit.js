@@ -4,11 +4,18 @@ async function scrapeJadwal(url) {
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
+    await page.setRequestInterception(true);
+    page.on('request', request => {
+        if (request.resourceType() === 'image')
+            request.abort();
+        else
+            request.continue();
+    });
     await page.goto(url);
-    await page.type('#Username', 'Usernamebimay')
-    await page.type('#Password', 'Password')
+    await page.type('#Username', 'usernamebimay')
+    await page.type('#Password', 'passwordbimay')
     page.click('#btnSubmit')
-    await page.waitFor(1000)
+    await page.waitFor(3000)
 
 
 
@@ -27,6 +34,47 @@ async function scrapeJadwal(url) {
             elements[i].parentNode.removeChild(elements[i]);
         }
     }, div_selector_to_remove1)
+
+    let div_selector_to_remove2 = ".iRoom";
+    await page.evaluate((sel) => {
+        var elements = document.querySelectorAll(sel);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].parentNode.removeChild(elements[i]);
+        }
+    }, div_selector_to_remove2)
+
+    let div_selector_to_remove3 = ".iCampus";
+    await page.evaluate((sel) => {
+        var elements = document.querySelectorAll(sel);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].parentNode.removeChild(elements[i]);
+        }
+    }, div_selector_to_remove3)
+
+    let div_selector_to_remove4 = ".iAction";
+    await page.evaluate((sel) => {
+        var elements = document.querySelectorAll(sel);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].parentNode.removeChild(elements[i]);
+        }
+    }, div_selector_to_remove4)
+
+    let div_selector_to_remove5 = ".iWeek";
+    await page.evaluate((sel) => {
+        var elements = document.querySelectorAll(sel);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].parentNode.removeChild(elements[i]);
+        }
+    }, div_selector_to_remove5)
+
+    let div_selector_to_remove6 = ".iSession";
+    await page.evaluate((sel) => {
+        var elements = document.querySelectorAll(sel);
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].parentNode.removeChild(elements[i]);
+        }
+    }, div_selector_to_remove6)
+
 
 
 
