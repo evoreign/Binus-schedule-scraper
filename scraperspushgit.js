@@ -12,8 +12,8 @@ async function scrapeJadwal(url) {
             request.continue();
     });
     await page.goto(url);
-    await page.type('#Username', 'usernamebimay')
-    await page.type('#Password', 'passwordbimay')
+    await page.type('#Username', 'usernamebinus')
+    await page.type('#Password', 'passwordbinus')
     page.click('#btnSubmit')
     await page.waitFor(3000)
 
